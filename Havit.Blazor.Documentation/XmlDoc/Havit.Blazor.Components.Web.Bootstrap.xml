@@ -19,11 +19,13 @@
             <summary>
             IDs of the expanded items (if <see cref="P:Havit.Blazor.Components.Web.Bootstrap.HxAccordion.StayOpen"/> is <code>true</code>, several items can be expanded).
             Do not use a constant value as it resets the accordion on every roundtrip. Use <see cref="P:Havit.Blazor.Components.Web.Bootstrap.HxAccordion.InitialExpandedItemIds"/> to set the initial state.
+            When <see cref="P:Havit.Blazor.Components.Web.Bootstrap.HxAccordion.StayOpen"/> is <c>true</c>, this parameter must be used to manage expanded items, and the <see cref="P:Havit.Blazor.Components.Web.Bootstrap.HxAccordion.ExpandedItemIdsChanged"/> event callback will be invoked for changes.
             </summary>
         </member>
         <member name="P:Havit.Blazor.Components.Web.Bootstrap.HxAccordion.ExpandedItemId">
             <summary>
-            ID of the single expanded item (if <see cref="P:Havit.Blazor.Components.Web.Bootstrap.HxAccordion.StayOpen"/> is <code>true</code>, use <see cref="P:Havit.Blazor.Components.Web.Bootstrap.HxAccordion.ExpandedItemIds" />, several items can be expanded).
+            ID of the single expanded item. If <see cref="P:Havit.Blazor.Components.Web.Bootstrap.HxAccordion.StayOpen"/> is <c>true</c>, this parameter is ignored, and you must use <see cref="P:Havit.Blazor.Components.Web.Bootstrap.HxAccordion.ExpandedItemIds"/> instead.
+            When <see cref="P:Havit.Blazor.Components.Web.Bootstrap.HxAccordion.StayOpen"/> is <c>true</c>, the <see cref="P:Havit.Blazor.Components.Web.Bootstrap.HxAccordion.ExpandedItemIdChanged"/> event callback will not be invoked.
             Do not use a constant value as it reverts the accordion to that item on every roundtrip. Use <see cref="P:Havit.Blazor.Components.Web.Bootstrap.HxAccordion.InitialExpandedItemId"/> to set the initial state.
             </summary>
         </member>
@@ -31,6 +33,7 @@
             <summary>
             Set to <c>true</c> to make accordion items stay open when another item is opened.
             The default is <c>false</c>, opening another item collapses the current item.
+            When <c>true</c>, <see cref="P:Havit.Blazor.Components.Web.Bootstrap.HxAccordion.ExpandedItemIds"/> must be used to manage expanded items.
             </summary>
         </member>
         <member name="P:Havit.Blazor.Components.Web.Bootstrap.HxAccordion.InitialExpandedItemId">
@@ -412,6 +415,11 @@
         <member name="P:Havit.Blazor.Components.Web.Bootstrap.HxButton.TooltipCssClass">
             <summary>
             Custom CSS class to render with the tooltip.
+            </summary>
+        </member>
+        <member name="P:Havit.Blazor.Components.Web.Bootstrap.HxButton.TooltipContainer">
+            <summary>
+            Appends the tooltip to a specific element. Default is <c>body</c>.
             </summary>
         </member>
         <member name="P:Havit.Blazor.Components.Web.Bootstrap.HxButton.TooltipWrapperCssClass">
@@ -2254,6 +2262,16 @@
             Additional attributes to be splatted onto an underlying HTML element.
             </summary>
         </member>
+        <member name="T:Havit.Blazor.Components.Web.Bootstrap.Internal.ChipRemoveActionBuilder">
+            <summary>
+            ChipRemoveActionBuilder is responsible for generating an Action that resets
+            a property referenced by a lambda expression to a specified value (typically default).
+            
+            Unlike most expression-based tools, this builder defers all expression analysis to the point
+            of action invocation. This enables fast action construction (suitable for per-render use)
+            and evaluates constraints and assumptions only when the action is actually executed.
+            </summary>
+        </member>
         <member name="T:Havit.Blazor.Components.Web.Bootstrap.Internal.FormValueComponentExtensions">
             <summary>
             Extension methods for <see cref="T:Havit.Blazor.Components.Web.Bootstrap.Internal.IFormValueComponent" />.
@@ -2287,6 +2305,11 @@
         </member>
         <member name="M:Havit.Blazor.Components.Web.Bootstrap.Internal.HxFormValueComponentRenderer.BuildRenderTree(Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder)">
             <inheritdoc />
+        </member>
+        <member name="M:Havit.Blazor.Components.Web.Bootstrap.Internal.HxFormValueComponentRenderer.BuildRenderValueWithFloatingLabel(Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder)">
+            <summary>
+            Renders the value/input and label inside floating label wrapper.
+            </summary>
         </member>
         <member name="M:Havit.Blazor.Components.Web.Bootstrap.Internal.HxFormValueComponentRenderer.BuildRenderLabel(Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder)">
             <summary>
@@ -3233,6 +3256,11 @@
             The label type.
             </summary>
         </member>
+        <member name="P:Havit.Blazor.Components.Web.Bootstrap.AutosuggestSettings.Spellcheck">
+            <summary>
+            Defines whether the input may be checked for spelling errors.
+            </summary>
+        </member>
         <member name="T:Havit.Blazor.Components.Web.Bootstrap.HxAutosuggest`2">
             <summary>
             Component for single item selection with dynamic suggestions (based on typed characters).<br />
@@ -3317,6 +3345,11 @@
         <member name="P:Havit.Blazor.Components.Web.Bootstrap.HxAutosuggest`2.InputSize">
             <summary>
             The size of the input.
+            </summary>
+        </member>
+        <member name="P:Havit.Blazor.Components.Web.Bootstrap.HxAutosuggest`2.Spellcheck">
+            <summary>
+            Defines whether the input may be checked for spelling errors. Default is <c>false</c>.
             </summary>
         </member>
         <member name="P:Havit.Blazor.Components.Web.Bootstrap.HxAutosuggest`2.LabelType">
@@ -4526,6 +4559,11 @@
             Size of the input.
             </summary>
         </member>
+        <member name="P:Havit.Blazor.Components.Web.Bootstrap.HxInputTextBase.Spellcheck">
+            <summary>
+            Defines whether the input may be checked for spelling errors.
+            </summary>
+        </member>
         <member name="P:Havit.Blazor.Components.Web.Bootstrap.HxInputTextBase.SelectOnFocus">
             <summary>
             Determines whether all the text within the input field is automatically selected when it receives focus.
@@ -5407,6 +5445,11 @@
             Determines whether all the text within the input field is automatically selected when it receives focus.
             </summary>
         </member>
+        <member name="P:Havit.Blazor.Components.Web.Bootstrap.InputTextSettings.Spellcheck">
+            <summary>
+            Defines whether the input may be checked for spelling errors.
+            </summary>
+        </member>
         <member name="T:Havit.Blazor.Components.Web.Bootstrap.LabelType">
             <summary>
             Label type.
@@ -5644,6 +5687,11 @@
             Input size of the input field.
             </summary>
         </member>
+        <member name="P:Havit.Blazor.Components.Web.Bootstrap.HxSearchBox`1.Spellcheck">
+            <summary>
+            Defines whether the input may be checked for spelling errors. Default is <c>false</c>.
+            </summary>
+        </member>
         <member name="P:Havit.Blazor.Components.Web.Bootstrap.HxSearchBox`1.MinimumLength">
             <summary>
             Minimum length to call the data provider (display any results). Default is <c>2</c>.
@@ -5826,6 +5874,11 @@
         <member name="P:Havit.Blazor.Components.Web.Bootstrap.SearchBoxSettings.ItemSelectionBehavior">
             <summary>
             The behavior when the item is selected.
+            </summary>
+        </member>
+        <member name="P:Havit.Blazor.Components.Web.Bootstrap.SearchBoxSettings.Spellcheck">
+            <summary>
+            Defines whether the input may be checked for spelling errors.
             </summary>
         </member>
         <member name="T:Havit.Blazor.Components.Web.Bootstrap.SelectSettings">
@@ -6981,6 +7034,7 @@
         <member name="P:Havit.Blazor.Components.Web.Bootstrap.HxPager.TotalPages">
             <summary>
             Total number of pages of data items.
+            Has to be equal to or greater than <c>1</c>.
             </summary>
         </member>
         <member name="P:Havit.Blazor.Components.Web.Bootstrap.HxPager.CurrentPageIndex">
@@ -9566,6 +9620,11 @@
             for all placeholders contained.
             </summary>
         </member>
+        <member name="P:Havit.Blazor.Components.Web.Bootstrap.HxPlaceholderContainer.ElementName">
+            <summary>
+            Gets or sets the name of the element to render. Default is <code>span</code>.
+            </summary>
+        </member>
         <member name="P:Havit.Blazor.Components.Web.Bootstrap.HxPlaceholderContainer.Defaults">
             <summary>
             Application-wide defaults for <see cref="T:Havit.Blazor.Components.Web.Bootstrap.HxPlaceholderContainer"/> and derived components.
@@ -9615,6 +9674,12 @@
             Additional CSS class.
             </summary>
         </member>
+        <member name="P:Havit.Blazor.Components.Web.Bootstrap.HxPlaceholderContainer.Active">
+            <summary>
+            Indicates whether the placeholder is active (if <c>false</c>, the component acts as regular HTML element).
+            Default is <c>true</c>.
+            </summary>
+        </member>
         <member name="P:Havit.Blazor.Components.Web.Bootstrap.HxPlaceholderContainer.AdditionalAttributes">
             <summary>
             Additional attributes to be splatted onto an underlying HTML element.
@@ -9643,6 +9708,11 @@
         <member name="T:Havit.Blazor.Components.Web.Bootstrap.PlaceholderContainerSettings">
             <summary>
             Settings for the <see cref="T:Havit.Blazor.Components.Web.Bootstrap.HxPlaceholderContainer"/> and derived components.
+            </summary>
+        </member>
+        <member name="P:Havit.Blazor.Components.Web.Bootstrap.PlaceholderContainerSettings.ElementName">
+            <summary>
+            Gets or sets the name of the element to render.
             </summary>
         </member>
         <member name="P:Havit.Blazor.Components.Web.Bootstrap.PlaceholderContainerSettings.Animation">
@@ -10143,6 +10213,11 @@
             A short hint displayed in the input field before the user enters a value.
             </summary>
         </member>
+        <member name="P:Havit.Blazor.Components.Web.Bootstrap.HxInputTags.Spellcheck">
+            <summary>
+            Defines whether the input for new tag may be checked for spelling errors.
+            </summary>
+        </member>
         <member name="P:Havit.Blazor.Components.Web.Bootstrap.HxInputTags.TagBadgeSettings">
             <summary>
             The settings for the <see cref="T:Havit.Blazor.Components.Web.Bootstrap.HxBadge"/> used to render tags. The default is <c>Color="<see cref="F:Havit.Blazor.Components.Web.Bootstrap.ThemeColor.Light"/>"</c> and <c>TextColor="<see cref="F:Havit.Blazor.Components.Web.Bootstrap.ThemeColor.Dark"/>"</c>.
@@ -10267,6 +10342,11 @@
         <member name="P:Havit.Blazor.Components.Web.Bootstrap.InputTagsSettings.TagBadgeSettings">
             <summary>
             Settings for the <see cref="T:Havit.Blazor.Components.Web.Bootstrap.HxBadge"/> used to render tags.
+            </summary>
+        </member>
+        <member name="P:Havit.Blazor.Components.Web.Bootstrap.InputTagsSettings.Spellcheck">
+            <summary>
+            Defines whether the input for new tag may be checked for spelling errors.
             </summary>
         </member>
         <member name="T:Havit.Blazor.Components.Web.Bootstrap.ThemeColor">
